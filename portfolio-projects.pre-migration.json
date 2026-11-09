@@ -1,0 +1,63 @@
+{
+  "backupType": "pre-migration snapshot of the existing new-portfolio project collection",
+  "sourceFile": "src/content.ts",
+  "existingProjectCount": 4,
+  "projects": [
+    {
+      "title": "SOC Automation Lab",
+      "category": "Cybersecurity",
+      "tag": "PLANNED CONCEPT",
+      "description": "A local-first investigation flow for synthetic alerts: validate an event, enrich its context, and make a response decision.",
+      "status": "Planned concept",
+      "icon": "⌁",
+      "stack": ["Python / FastAPI", "n8n", "React dashboard", "Synthetic JSON"],
+      "problem": "Security event data can be noisy, and a useful investigation needs clear context before a response is chosen.",
+      "solution": "Planned demonstration: take synthetic events through validation, local enrichment, triage, and human review.",
+      "features": ["Reserved example IPs only", "Local-first workflow design", "Human decision checkpoint"],
+      "relatedSkills": ["SIEM concepts", "Incident response", "n8n", "React"],
+      "demo": "#cyber-lab"
+    },
+    {
+      "title": "Signal / Noise",
+      "category": "Web Development",
+      "tag": "DESIGN STUDY",
+      "description": "A focused interface study in turning dense operational data into calm, legible decisions.",
+      "status": "Portfolio study",
+      "icon": "◈",
+      "stack": ["React", "TypeScript", "CSS"],
+      "problem": "Important details are easy to miss when interfaces compete for attention.",
+      "solution": "A visual study of restrained contrast, clear hierarchy, and concise incident summaries.",
+      "features": ["Responsive layouts", "Focused status hierarchy", "Keyboard-visible focus states"],
+      "relatedSkills": ["React", "TypeScript", "CSS"],
+      "demo": "#cyber-lab"
+    },
+    {
+      "title": "Study-to-Story",
+      "category": "AI Automation",
+      "tag": "WORKFLOW CONCEPT",
+      "description": "A human-reviewed workflow concept that turns learning notes into a structured, source-aware video draft.",
+      "status": "Workflow concept",
+      "icon": "⤳",
+      "stack": ["n8n", "Local Ollama", "FFmpeg"],
+      "problem": "Turning study notes into a reviewable explainer involves several repeatable steps.",
+      "solution": "A planned workflow validates notes, drafts a structured script, and pauses for human review before any publishing step.",
+      "features": ["Local model target", "Source fields in the draft", "Manual review before publishing"],
+      "relatedSkills": ["n8n", "LLM integration", "Workflow automation"],
+      "demo": "#automation"
+    },
+    {
+      "title": "Rohan.OS Terminal",
+      "category": "Experimental",
+      "tag": "BROWSER DEMO",
+      "description": "A small simulated command line that responds to portfolio-specific prompts without running shell commands.",
+      "status": "Interactive demo",
+      "icon": "⌘",
+      "stack": ["React", "TypeScript", "CSS"],
+      "problem": "A portfolio can show personality without exposing a real command runner.",
+      "solution": "A fixed set of safe, simulated commands returns curated portfolio context.",
+      "features": ["help, about, skills, projects", "No operating-system access", "clear and whoami commands"],
+      "relatedSkills": ["React", "TypeScript", "Technical documentation"],
+      "demo": "#playground"
+    }
+  ]
+}

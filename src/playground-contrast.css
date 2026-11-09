@@ -1,0 +1,95 @@
+/* Shared light-theme contrast corrections for every interactive Playground tool. */
+:root[data-theme="light"] .cyber-demo {
+  --lab-ink: #192337;
+  --lab-text: #344258;
+  --lab-muted: #4b5b70;
+  --lab-dim: #596a80;
+  --lab-accent: #08786e;
+  --lab-line: rgba(63, 78, 119, .24);
+  --lab-pane: rgba(255, 255, 255, .94);
+  --lab-raised: rgba(247, 249, 255, .97);
+}
+:root[data-theme="light"] .cyber-demo .playbook-steps li.step-active {
+  background: #eef1ff;
+  border-color: #747bd0;
+  box-shadow: 0 12px 28px rgba(51, 63, 120, .14), inset 0 1px #fff;
+}
+:root[data-theme="light"] .cyber-demo .playbook-steps li.step-active > div > small,
+:root[data-theme="light"] .cyber-demo .playbook-steps li.step-active .playbook-review > p {
+  color: #344258;
+}
+:root[data-theme="light"] .cyber-demo .playbook-steps li:not(.step-active) > div > small {
+  color: #596a80;
+}
+:root[data-theme="light"] .cyber-demo :is(input, select, textarea) {
+  color: #192337;
+  background-color: #fff;
+}
+:root[data-theme="light"] .cyber-demo :is(input, select, textarea)::placeholder {
+  color: #596a80;
+  opacity: 1;
+}
+:root[data-theme="light"] .arcade {
+  --arc-ink: #192337;
+  --arc-text: #344258;
+  --arc-muted: #4c5b70;
+  --arc-accent: #4a4ca8;
+  --arc-line: rgba(63, 78, 119, .24);
+  --arc-pane: rgba(255, 255, 255, .94);
+  --arc-raised: rgba(247, 249, 255, .97);
+  color: var(--arc-text);
+}
+:root[data-theme="light"] .arcade :is(.challenge, .arcade-game, .game-tab-panel, .arcade-report-item) {
+  color: #344258;
+}
+:root[data-theme="light"] .arcade .arcade-report-item :is(dt, p) {
+  color: #4c5b70;
+}
+:root[data-theme="light"] .arcade .arcade-report-item.is-correct .arcade-report-item-head > b {
+  color: #176b48;
+}
+:root[data-theme="light"] .arcade .arcade-report-item.is-incorrect .arcade-report-item-head > b {
+  color: #87500b;
+}
+:root[data-theme="light"] .playground {
+  --pg-ink: #192337;
+  --pg-muted: #46556b;
+  --pg-subtle: #58677c;
+  --pg-border: rgba(63, 78, 119, .24);
+  --pg-panel: rgba(255, 255, 255, .94);
+  --pg-panel-raised: rgba(247, 249, 255, .97);
+  --pg-editor: #f8faff;
+  --pg-accent: #414aa8;
+  --pg-code: #253249;
+  --pg-line: #526178;
+}
+:root[data-theme="light"] .terminal-wrap {
+  --term-ink: #192337;
+  --term-text: #344258;
+  --term-muted: #4b5b70;
+  --term-dim: #596a80;
+  --term-accent: #08786e;
+  --term-border: rgba(63, 78, 119, .24);
+  --term-glass: rgba(255, 255, 255, .96);
+  --term-raised: rgba(247, 249, 255, .98);
+}
+:root[data-theme="light"] .terminal-wrap .term-line-error { color: #a32632; }
+:root[data-theme="light"] .automation-workflow {
+  --wf-ink: #192337;
+  --wf-text: #344258;
+  --wf-muted: #4b5b70;
+  --wf-accent: #08786e;
+  --wf-line: rgba(63, 78, 119, .24);
+  --wf-pane: rgba(255, 255, 255, .94);
+  --wf-raised: rgba(247, 249, 255, .98);
+}
+:root[data-theme="light"] .automation-builder-toolbar button:disabled {
+  color: #596a80;
+  border-color: rgba(63, 78, 119, .24);
+  background: #f0f2f8;
+  opacity: 1;
+}
+:root[data-theme="light"] .automation-node-state,
+:root[data-theme="light"] .automation-log-content > small {
+  color: #4b5b70;
+}

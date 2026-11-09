@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "owner": "Rohan Singh",
+    "sourceWebsite": "https://rohansinghbzy.netlify.app",
+    "lastReviewed": "2026-11-08",
+    "existingProjectsPreserved": 4,
+    "projectsMigrated": 8,
+    "duplicatesMerged": 0,
+    "totalUniqueProjects": 12,
+    "sourceNotes": "Imported descriptions and technology claims are limited to the source portfolio, linked repository README/manifests, and inspected live previews. Preview links that timed out or opened blank are retained as sourceDemoUrl for provenance and are not presented as working demos."
+  },
+  "projects": [
+    {
+      "title": "Previous Portfolio",
+      "category": "Web Development",
+      "tag": "PREVIOUS PORTFOLIO",
+      "description": "My previous portfolio website.",
+      "status": "Previous portfolio",
+      "icon": "↗",
+      "problem": "",
+      "solution": "",
+      "features": [],
+      "relatedSkills": [],
+      "id": "previous-portfolio",
+      "projectType": "Portfolio Archive",
+      "technologies": [],
+      "previewImage": "/images/projects/previous-portfolio.png",
+      "demoUrl": "https://rohansinghbzy.netlify.app",
+      "githubUrl": null,
+      "detailsUrl": null,
+      "migrationStatus": "partial",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "Previous Portfolio",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true,
+      "sourceDemoUrl": "https://rohansinghbzy.netlify.app",
+      "verificationNote": "The owner identified this as the previous portfolio. Its page content was not independently reviewed during this catalog update."
+    },
+    {
+      "title": "Car Rental",
+      "category": "Web Development",
+      "tag": "MULTI-PAGE",
+      "description": "A car rental website for comparing vehicles and choosing rental details such as pickup and drop-off locations.",
+      "status": "Live preview verified",
+      "icon": "↗",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Vehicle category browsing",
+        "Pickup and drop-off selection",
+        "Rental search / booking interface"
+      ],
+      "relatedSkills": [
+        "React",
+        "CSS"
+      ],
+      "id": "car-rental",
+      "projectType": "Multi-Page",
+      "technologies": [
+        "React",
+        "Sass / SCSS"
+      ],
+      "previewImage": "/images/projects/car-rental.jpg",
+      "demoUrl": "https://bzydomecars.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/Bzy_CarRental",
+      "detailsUrl": "https://github.com/RohanS15/Bzy_CarRental",
+      "sourceDemoUrl": "https://bzydomecars.netlify.app/",
+      "migrationStatus": "verified",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "Car Rental",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Gymate",
+      "category": "Fitness",
+      "tag": "MULTI-PAGE",
+      "description": "A fitness website with pages for classes, schedules, blog content, pricing, and contact.",
+      "status": "Demo link unverified",
+      "icon": "✳",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Classes and schedule pages",
+        "Pricing page",
+        "About and contact pages"
+      ],
+      "relatedSkills": [
+        "React",
+        "CSS"
+      ],
+      "id": "gymate",
+      "projectType": "Multi-Page",
+      "technologies": [
+        "React",
+        "Tailwind CSS"
+      ],
+      "previewImage": "/images/projects/gymate.jpg",
+      "demoUrl": "https://bzygymate.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/Gymate",
+      "detailsUrl": "https://github.com/RohanS15/Gymate",
+      "sourceDemoUrl": "https://bzygymate.netlify.app/",
+      "migrationStatus": "partial",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "verificationNote": "Demo navigation timed out during migration review; original source URL retained for reference.",
+      "name": "Gymate",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "NFT Market",
+      "category": "Web3",
+      "tag": "SINGLE-PAGE",
+      "description": "An NFT landing page featuring a launch message, signup prompt, and auction information.",
+      "status": "Live preview verified",
+      "icon": "◇",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Launch introduction",
+        "Signup prompt",
+        "Auction information"
+      ],
+      "relatedSkills": [
+        "React"
+      ],
+      "id": "nft-market",
+      "projectType": "Single-Page",
+      "technologies": [
+        "React"
+      ],
+      "previewImage": "/images/projects/nft-market.jpg",
+      "demoUrl": "https://bzynft.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/nft-landing-page",
+      "detailsUrl": "https://github.com/RohanS15/nft-landing-page",
+      "sourceDemoUrl": "https://bzynft.netlify.app/",
+      "migrationStatus": "verified",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "NFT Market",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Rohan.OS Terminal",
+      "category": "Experimental",
+      "tag": "BROWSER DEMO",
+      "description": "A small simulated command line that responds to portfolio-specific prompts without running shell commands.",
+      "status": "Interactive demo",
+      "icon": "⌘",
+      "problem": "A portfolio can show personality without exposing a real command runner.",
+      "solution": "A fixed set of safe, simulated commands returns curated portfolio context.",
+      "features": [
+        "help, about, skills, projects",
+        "No operating-system access",
+        "clear and whoami commands"
+      ],
+      "relatedSkills": [
+        "React",
+        "TypeScript",
+        "Technical documentation"
+      ],
+      "id": "rohan-os-terminal",
+      "projectType": "Current portfolio",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "CSS"
+      ],
+      "previewImage": "/images/projects/rohan-os-terminal.svg",
+      "demoUrl": "/playground#terminal",
+      "githubUrl": null,
+      "detailsUrl": null,
+      "migrationStatus": "existing",
+      "sourceWebsite": "Current portfolio",
+      "name": "Rohan.OS Terminal",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Study-to-Story",
+      "category": "AI Automation",
+      "tag": "WORKFLOW CONCEPT",
+      "description": "A human-reviewed workflow concept that turns learning notes into a structured, source-aware video draft.",
+      "status": "Workflow concept",
+      "icon": "⤳",
+      "problem": "Turning study notes into a reviewable explainer involves several repeatable steps.",
+      "solution": "A planned workflow validates notes, drafts a structured script, and pauses for human review before any publishing step.",
+      "features": [
+        "Local model target",
+        "Source fields in the draft",
+        "Manual review before publishing"
+      ],
+      "relatedSkills": [
+        "n8n",
+        "LLM integration",
+        "Workflow automation"
+      ],
+      "id": "study-to-story",
+      "projectType": "Current portfolio",
+      "technologies": [
+        "n8n",
+        "Local Ollama",
+        "FFmpeg"
+      ],
+      "previewImage": "/images/projects/study-to-story.svg",
+      "demoUrl": "/playground#automation",
+      "githubUrl": null,
+      "detailsUrl": null,
+      "migrationStatus": "existing",
+      "sourceWebsite": "Current portfolio",
+      "name": "Study-to-Story",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "SOC Automation Lab",
+      "category": "Cybersecurity",
+      "tag": "PLANNED CONCEPT",
+      "description": "A local-first investigation flow for synthetic alerts: validate an event, enrich its context, and make a response decision.",
+      "status": "Planned concept",
+      "icon": "⌁",
+      "problem": "Security event data can be noisy, and a useful investigation needs clear context before a response is chosen.",
+      "solution": "Planned demonstration: take synthetic events through validation, local enrichment, triage, and human review.",
+      "features": [
+        "Reserved example IPs only",
+        "Local-first workflow design",
+        "Human decision checkpoint"
+      ],
+      "relatedSkills": [
+        "SIEM concepts",
+        "Incident response",
+        "n8n",
+        "React"
+      ],
+      "id": "soc-automation-lab",
+      "projectType": "Current portfolio",
+      "technologies": [
+        "Python / FastAPI",
+        "n8n",
+        "React dashboard",
+        "Synthetic JSON"
+      ],
+      "previewImage": "/images/projects/soc-automation-lab.svg",
+      "demoUrl": "/playground#cyber-lab",
+      "githubUrl": null,
+      "detailsUrl": null,
+      "migrationStatus": "existing",
+      "sourceWebsite": "Current portfolio",
+      "name": "SOC Automation Lab",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Signal / Noise",
+      "category": "Web Development",
+      "tag": "DESIGN STUDY",
+      "description": "A focused interface study in turning dense operational data into calm, legible decisions.",
+      "status": "Portfolio study",
+      "icon": "◈",
+      "problem": "Important details are easy to miss when interfaces compete for attention.",
+      "solution": "A visual study of restrained contrast, clear hierarchy, and concise incident summaries.",
+      "features": [
+        "Responsive layouts",
+        "Focused status hierarchy",
+        "Keyboard-visible focus states"
+      ],
+      "relatedSkills": [
+        "React",
+        "TypeScript",
+        "CSS"
+      ],
+      "id": "signal-noise",
+      "projectType": "Current portfolio",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "CSS"
+      ],
+      "previewImage": "/images/projects/signal-noise.svg",
+      "demoUrl": "/playground#cyber-lab",
+      "githubUrl": null,
+      "detailsUrl": null,
+      "migrationStatus": "existing",
+      "sourceWebsite": "Current portfolio",
+      "name": "Signal / Noise",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Coindome",
+      "category": "Web3",
+      "tag": "SINGLE-PAGE",
+      "description": "A cryptocurrency information page showing live market data such as price, market capitalization, and trading volume.",
+      "status": "Live preview verified",
+      "icon": "₿",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Cryptocurrency search",
+        "Price and market capitalization",
+        "Trading volume and market metrics"
+      ],
+      "relatedSkills": [
+        "React",
+        "REST APIs"
+      ],
+      "id": "coindome",
+      "projectType": "Single-Page",
+      "technologies": [
+        "React",
+        "Sass / SCSS",
+        "CoinGecko API"
+      ],
+      "previewImage": "/images/projects/coindome.jpg",
+      "demoUrl": "https://bzycoindome.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/Coindome",
+      "detailsUrl": "https://github.com/RohanS15/Coindome",
+      "sourceDemoUrl": "https://bzycoindome.netlify.app/",
+      "migrationStatus": "verified",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "Coindome",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "E-commerce",
+      "category": "E-commerce",
+      "tag": "MULTI-PAGE",
+      "description": "A minimalist React storefront with product browsing, categories, product pages, and a shopping cart.",
+      "status": "Live preview verified",
+      "icon": "◫",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Product categories",
+        "Product detail pages",
+        "Shopping cart"
+      ],
+      "relatedSkills": [
+        "React",
+        "CSS"
+      ],
+      "id": "e-commerce",
+      "projectType": "Multi-Page",
+      "technologies": [
+        "React",
+        "Vanilla CSS"
+      ],
+      "previewImage": "/images/projects/e-commerce.jpg",
+      "demoUrl": "https://bzyecom.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/bzy-ecom",
+      "detailsUrl": "https://github.com/RohanS15/bzy-ecom",
+      "sourceDemoUrl": "https://bzyecom.netlify.app/",
+      "migrationStatus": "verified",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "E-commerce",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Ecom-furnitures",
+      "category": "E-commerce",
+      "tag": "MULTI-PAGE",
+      "description": "A furniture shopping website with room categories, product listings, and shop navigation.",
+      "status": "Live preview verified",
+      "icon": "⌂",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Home, shop, blog, about, and contact navigation",
+        "Room categories",
+        "Product listings"
+      ],
+      "relatedSkills": [
+        "React"
+      ],
+      "id": "ecom-furnitures",
+      "projectType": "Multi-Page",
+      "technologies": [
+        "React"
+      ],
+      "previewImage": "/images/projects/ecom-furnitures.jpg",
+      "demoUrl": "https://bzyfurnitures.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/Bzy-furnitures",
+      "detailsUrl": "https://github.com/RohanS15/Bzy-furnitures",
+      "sourceDemoUrl": "https://bzyfurnitures.netlify.app/",
+      "migrationStatus": "verified",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "Ecom-furnitures",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true
+    },
+    {
+      "title": "Stack Overflow Clone",
+      "category": "Web Development",
+      "tag": "MULTI-PAGE",
+      "description": "A question-and-answer site interface with question, tag, and user navigation.",
+      "status": "Preview loaded; some remote content did not finish loading",
+      "icon": "⌘",
+      "problem": "",
+      "solution": "",
+      "features": [
+        "Question browsing",
+        "Tags and users navigation",
+        "Ask Question entry point"
+      ],
+      "relatedSkills": [],
+      "id": "stack-overflow-clone",
+      "projectType": "Multi-Page",
+      "technologies": [],
+      "previewImage": "/images/projects/stack-overflow-clone.jpg",
+      "demoUrl": "https://stackoverflowbzydome.netlify.app/",
+      "githubUrl": "https://github.com/RohanS15/Stack-OverFlow-Cloning",
+      "detailsUrl": "https://github.com/RohanS15/Stack-OverFlow-Cloning",
+      "sourceDemoUrl": "https://stackoverflowbzydome.netlify.app/",
+      "migrationStatus": "partial",
+      "sourceWebsite": "https://rohansinghbzy.netlify.app",
+      "name": "Stack Overflow Clone",
+      "longDescription": "",
+      "additionalImages": [],
+      "originalProject": true,
+      "verificationNote": "The page loaded in review, but some question data remained in a loading state."
+    }
+  ]
+}

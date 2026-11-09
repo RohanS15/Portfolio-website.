@@ -1,0 +1,189 @@
+/* Playground surfaces use their own complete theme contract. The iframe keeps
+   the colors authored by the user; these tokens theme the editor chrome. */
+.playground {
+  --pg-ink: #e7edf0;
+  --pg-muted: #9baab2;
+  --pg-subtle: #778790;
+  --pg-border: rgba(184, 213, 224, .15);
+  --pg-panel: rgba(17, 25, 32, .78);
+  --pg-panel-raised: rgba(22, 33, 41, .76);
+  --pg-editor: rgba(8, 14, 19, .78);
+  --pg-accent: #6ce6d2;
+  --pg-code: #d3e2e7;
+  --pg-line: #667780;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--pg-border);
+  border-radius: 18px;
+  color: var(--pg-ink);
+  background: var(--pg-panel);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  backdrop-filter: blur(24px) saturate(145%);
+  box-shadow: 0 24px 70px rgba(4, 12, 18, .22), inset 0 1px 0 rgba(255,255,255,.11);
+  transition: color 260ms ease, background 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+.playground::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: .3;
+  background: linear-gradient(112deg, transparent 14%, rgba(255,255,255,.08) 33%, transparent 45%, transparent 70%, rgba(108,230,210,.045) 84%, transparent 94%);
+  background-size: 100% 100%;
+}
+.playground .play-head,
+.playground .editor-tabs,
+.playground .preview-top,
+.playground .editor-foot {
+  color: var(--pg-muted);
+  border-color: var(--pg-border);
+  background: var(--pg-panel-raised);
+}
+.playground .play-head {
+  min-height: 68px;
+  height: auto;
+  gap: 16px;
+  padding: 12px 20px;
+}
+.playground .play-head > div:first-child { gap: 8px; flex-wrap: wrap; }
+.playground .play-head b { color: var(--pg-ink); font: 600 12px var(--mono); letter-spacing: .02em; }
+.playground .play-head span { color: var(--pg-subtle); font: 9px var(--mono); letter-spacing: .11em; }
+.playground .play-actions { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.playground .play-actions select,
+.playground .play-actions > button:not(.button-primary) {
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--pg-border);
+  border-radius: 9px;
+  background: rgba(255,255,255,.035);
+  color: var(--pg-ink);
+  font: 10px var(--mono);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.playground .play-actions select { max-width: 160px; }
+.playground .play-actions select option { background: #18212a; color: #f0f4f7; }
+.playground .play-actions > button:not(.button-primary) { cursor: pointer; }
+.playground .play-actions > button:hover,
+.playground .play-actions select:hover,
+.playground .editor-tabs button:hover,
+.playground .copy:hover {
+  border-color: color-mix(in srgb, var(--pg-accent) 52%, var(--pg-border));
+  background: color-mix(in srgb, var(--pg-accent) 9%, var(--pg-panel-raised));
+  box-shadow: 0 5px 18px rgba(34, 120, 128, .12), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.playground .play-actions button:active { transform: translateY(1px); }
+.playground .play-grid {
+  min-height: 470px;
+  background: transparent;
+}
+.playground .editor {
+  min-width: 0;
+  background: color-mix(in srgb, var(--pg-panel) 70%, transparent);
+  border-color: var(--pg-border);
+}
+.playground .editor-tabs { min-height: 48px; padding: 0 10px; gap: 5px; }
+.playground .editor-tabs [role="tablist"] { display: flex; align-items: center; gap: 4px; }
+.playground .editor-tabs button,
+.playground .editor-tabs .copy {
+  min-height: 32px;
+  margin: 0;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--pg-muted);
+  background: transparent;
+  font: 10px var(--mono);
+}
+.playground .editor-tabs button.selected {
+  color: var(--pg-accent);
+  border-color: color-mix(in srgb, var(--pg-accent) 25%, transparent);
+  background: color-mix(in srgb, var(--pg-accent) 10%, transparent);
+}
+.playground .editor-tabs .copy { margin-left: auto; cursor: pointer; }
+.playground .code-area {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+}
+.playground .editor-surface { flex: 1; width: 100%; height: 350px; min-height: 350px; overflow: hidden; background: transparent; }
+.playground .cm-editor { width: 100%; height: 100%; }
+.playground .cm-editor { min-height: 350px; color: var(--pg-code); background: transparent; font: 12px/1.8 var(--mono); }
+.playground .cm-scroller { scrollbar-color: color-mix(in srgb, var(--pg-muted) 38%, transparent) transparent; }
+.playground .editor-loading { display: grid; min-height: 350px; place-items: center; color: var(--pg-muted); font: 11px var(--mono); }
+.playground .editor-foot { min-height: 36px; height: auto; padding: 8px 14px; font-size: 8px; letter-spacing: .08em; }
+.playground .editor-foot span:first-child { color: var(--pg-accent); }
+.playground .editor-foot i,
+.playground .preview-top i { font-style: normal; color: var(--pg-accent); }
+.playground .preview { min-width: 0; background: color-mix(in srgb, var(--pg-editor) 48%, transparent); }
+.playground .preview-top { min-height: 48px; height: auto; padding: 0 16px; font-size: 9px; letter-spacing: .06em; }
+.playground .preview-top span:last-child { color: var(--pg-subtle); }
+.playground .preview iframe { min-height: 350px; background: var(--pg-editor); }
+.playground .preview-note { min-height: 38px; padding: 10px 14px; border-color: var(--pg-border); color: var(--pg-muted); font: 10px/1.5 var(--mono); }
+.playground :focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 2px; }
+.playground .button-primary { min-height: 36px; border-radius: 9px; }
+.playground.play-fullscreen {
+  z-index: 1000;
+  inset: 12px;
+  border-radius: 18px;
+  background: var(--pg-panel);
+  box-shadow: 0 35px 120px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.play-fullscreen .play-grid { min-height: 0; }
+.play-fullscreen .code-area,
+.play-fullscreen .preview iframe { min-height: 0; }
+.play-fullscreen .code-area { flex: 1; }
+.play-fullscreen .editor-surface,
+.play-fullscreen .cm-editor { height: 100%; min-height: 0; }
+.play-fullscreen .editor-loading { min-height: 100%; }
+.play-fullscreen .preview iframe { height: 100%; }
+:root[data-theme="light"] .playground {
+  --pg-ink: #22283a;
+  --pg-muted: #535d73;
+  --pg-subtle: #68748a;
+  --pg-border: rgba(80, 97, 151, .2);
+  --pg-panel: rgba(255,255,255,.72);
+  --pg-panel-raised: rgba(248,250,255,.72);
+  --pg-editor: rgba(241,245,252,.82);
+  --pg-accent: #4a55be;
+  --pg-code: #283449;
+  --pg-line: #758197;
+  background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(246,248,255,.74) 55%, rgba(240,250,249,.78));
+  border-color: rgba(87, 105, 166, .24);
+  box-shadow: 0 24px 72px rgba(74, 90, 153, .14), inset 0 1px 0 rgba(255,255,255,.96);
+}
+:root[data-theme="light"] .playground::after {
+  opacity: .52;
+  background-image: linear-gradient(112deg, transparent 12%, rgba(255,255,255,.76) 32%, rgba(174,192,255,.15) 38%, transparent 49%, transparent 68%, rgba(92,190,202,.1) 81%, transparent 94%);
+}
+:root[data-theme="light"] .playground .play-actions select option { background: #fff; color: #22283a; }
+@media (max-width: 760px) {
+  .playground { border-radius: 14px; }
+  .playground .play-head { align-items: flex-start; flex-direction: column; }
+  .playground .play-actions { width: 100%; justify-content: flex-start; }
+  .playground .play-actions select { flex: 1; max-width: none; }
+  .playground .play-grid { grid-template-columns: minmax(0, 1fr); }
+  .playground .editor { border-right: 0; border-bottom: 1px solid var(--pg-border); }
+  .playground .editor-surface,
+  .playground .cm-editor,
+  .playground .editor-loading { height: 290px; min-height: 290px; }
+  .playground .preview iframe { min-height: 320px; }
+  .playground .editor-foot { gap: 8px; flex-wrap: wrap; }
+  .play-fullscreen { inset: 0 !important; border-radius: 0 !important; }
+}
+@media (max-width: 420px) {
+  .playground .play-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .playground .play-actions select { grid-column: 1 / -1; width: 100%; }
+  .playground .play-actions > * { justify-content: center; }
+  .playground .play-actions .button-primary { padding-inline: 8px; }
+  .playground .preview-top { gap: 8px; font-size: 8px; }
+  .playground .editor-foot { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .playground::after { animation: none; }
+  .playground, .playground * { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
