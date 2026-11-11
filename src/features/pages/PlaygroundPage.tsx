@@ -8,7 +8,6 @@ const CyberLab = lazy(() => import("../../CyberLab"));
 const GameArcade = lazy(() => import("../../GameArcade"));
 const Automation = lazy(() => import("../../Automation"));
 const Terminal = lazy(() => import("../../Terminal"));
-const TerminalGuide = lazy(() => import("../../Terminal").then((module) => ({ default: module.TerminalGuide })));
 
 export default function PlaygroundPage() {
   return (
@@ -82,16 +81,7 @@ export default function PlaygroundPage() {
                 copy="Edit the sample and run it. HTML, CSS, and JavaScript execute inside a sandboxed frame, isolated from this portfolio."
               />
               <div className="interactive-toolbar">
-                <Tutorial
-                  id="playground"
-                  title="A quick tour of the code playground"
-                  steps={[
-                    "Choose a starter example to load a working page.",
-                    "Edit HTML, CSS, or JavaScript in the editor tabs.",
-                    "Press Run to preview your changes in the isolated sandbox.",
-                    "Reset restores the sample. Copy and fullscreen are available beside Run.",
-                  ]}
-                />
+                <Tutorial id="playground" />
               </div>
               <div className="reveal">
                 <DeferredChunk panel="playground"><ErrorBoundary label="Code playground"><Suspense fallback={<LoadingBlock label="code playground" panel="playground" />}><Playground /></Suspense></ErrorBoundary></DeferredChunk>
@@ -101,7 +91,7 @@ export default function PlaygroundPage() {
                   <Mark>THE OTHER INTERFACE</Mark>
                   <h3>Talk to the portfolio.</h3>
                   <p>A simulated shell. No commands leave the browser.</p>
-                  <DeferredChunk panel="terminal-guide"><ErrorBoundary label="Terminal guide"><Suspense fallback={null}><TerminalGuide /></Suspense></ErrorBoundary></DeferredChunk>
+                  <Tutorial id="terminal" />
                 </div>
                 <DeferredChunk panel="terminal"><ErrorBoundary label="Terminal"><Suspense fallback={<LoadingBlock label="terminal" panel="terminal" />}><Terminal /></Suspense></ErrorBoundary></DeferredChunk>
               </div>
@@ -120,16 +110,7 @@ export default function PlaygroundPage() {
                 copy="Small browser challenges inspired by security and software. Purely for fun; no data leaves this page."
               />
               <div className="interactive-toolbar">
-                <Tutorial
-                  id="arcade"
-                  title="How the arcade works"
-                  steps={[
-                    "Choose one of the browser games to begin.",
-                    "Read the prompt and use the on-screen controls to play each round.",
-                    "Your score and best run stay in this browser only.",
-                    "Restart a round or return to game selection whenever you like.",
-                  ]}
-                />
+                <Tutorial id="arcade" />
               </div>
               <div className="reveal">
                 <DeferredChunk panel="arcade"><ErrorBoundary label="Arcade"><Suspense fallback={<LoadingBlock label="arcade" panel="arcade" />}><GameArcade /></Suspense></ErrorBoundary></DeferredChunk>
@@ -149,16 +130,7 @@ export default function PlaygroundPage() {
                 copy="An educational investigation sandbox with synthetic events only. This is not a live security monitoring system."
               />
               <div className="interactive-toolbar">
-                <Tutorial
-                  id="cyber-lab"
-                  title="Investigate a synthetic incident"
-                  steps={[
-                    "The live desk is ready immediately. Pick a signal from the left rail.",
-                    "Scan its event details and choose an analyst response for instant feedback and points.",
-                    "Try Signal Sprint for quick rounds with score and explanations.",
-                    "All examples are synthetic and nothing is sent to a real system.",
-                  ]}
-                />
+                <Tutorial id="cyber-lab" />
               </div>
               <div className="reveal">
                 <DeferredChunk panel="cyber-lab"><ErrorBoundary label="Cyber Lab"><Suspense fallback={<LoadingBlock label="cyber lab" panel="cyber-lab" />}><CyberLab /></Suspense></ErrorBoundary></DeferredChunk>
@@ -178,16 +150,7 @@ export default function PlaygroundPage() {
                 copy="Step through a sample n8n-style flow. Each node is simulated in your browser; no third-party service is called."
               />
               <div className="interactive-toolbar">
-                <Tutorial
-                  id="automation"
-                  title="Step through the workflow"
-                  steps={[
-                    "Choose a sample trigger from the menu.",
-                    "Advance the simulation to run each visible checkpoint.",
-                    "Inspect the review step and see how the sample data is handled.",
-                    "This is a local demonstration; no external service is connected.",
-                  ]}
-                />
+                <Tutorial id="automation" />
               </div>
               <div className="reveal">
                 <DeferredChunk panel="automation"><ErrorBoundary label="Automation"><Suspense fallback={<LoadingBlock label="workflow simulator" panel="automation" />}><Automation /></Suspense></ErrorBoundary></DeferredChunk>
