@@ -19,6 +19,7 @@ type CubeSurfaceRef = MutableRefObject<THREE.Mesh | null>;
 type OrbitLabelRefs = MutableRefObject<Record<OrbitId, HTMLButtonElement | null>>;
 type OrbitLeaderRefs = MutableRefObject<Record<OrbitId, SVGLineElement | null>>;
 type CapturableTarget = EventTarget & {
+  hasPointerCapture: (pointerId: number) => boolean;
   setPointerCapture: (pointerId: number) => void;
   releasePointerCapture: (pointerId: number) => void;
 };
@@ -42,37 +43,38 @@ const orbits: Array<{
 
 function createCodeTexture(color: string) {
   const canvas = document.createElement("canvas");
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = 512;
+  canvas.height = 512;
   const context = canvas.getContext("2d");
   if (context) {
     context.fillStyle = color;
-    context.font = "bold 78px monospace";
+    context.font = "bold 156px monospace";
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillText("</>", 128, 128);
+    context.fillText("</>", 256, 256);
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 4;
   return texture;
 }
 
 function createThemeAwareFaceTexture(source: THREE.Texture, dark: boolean, monochrome = false, linux = false) {
   const canvas = document.createElement("canvas");
-  canvas.width = 256;
-  canvas.height = 256;
+  canvas.width = 512;
+  canvas.height = 512;
   const context = canvas.getContext("2d");
   if (!context) return new THREE.CanvasTexture(canvas);
   const image = source.image as HTMLImageElement;
   const imageWidth = image.naturalWidth || image.width || 128;
   const imageHeight = image.naturalHeight || image.height || 128;
-  const imageScale = Math.min(210 / imageWidth, 210 / imageHeight);
+  const imageScale = Math.min(420 / imageWidth, 420 / imageHeight);
   const width = imageWidth * imageScale;
   const height = imageHeight * imageScale;
-  const drawX = (256 - width) / 2;
-  const drawY = (256 - height) / 2;
+  const drawX = (512 - width) / 2;
+  const drawY = (512 - height) / 2;
   context.drawImage(image, drawX, drawY, width, height);
-  const pixels = context.getImageData(0, 0, 256, 256);
+  const pixels = context.getImageData(0, 0, 512, 512);
   const color = dark ? [210, 255, 247] : [25, 91, 95];
   for (let index = 0; index < pixels.data.length; index += 4) {
     const red = pixels.data[index];
@@ -146,7 +148,7 @@ function OrbitTrack({
 
   useFrame((_, delta) => {
     if (group.current && !reducedMotion) {
-      group.current.rotation.z += delta * orbit.speed * orbit.direction;
+      group.current.rotation.z += Math.min(delta, 1 / 30) * orbit.speed * orbit.direction;
     }
   });
 
@@ -188,6 +190,7 @@ function InteractiveCube({
 }) {
   const group = useRef<THREE.Group>(null);
   const drag = useRef({ active: false, pointerId: -1, x: 0, y: 0, rx: 0, ry: 0 });
+  const motionTime = useRef(0);
   const cubeMaterial = useRef<THREE.MeshPhysicalMaterial>(null);
   const hoverLight = useRef<THREE.PointLight>(null);
   const [hovered, setHovered] = useState(false);
@@ -195,6 +198,12 @@ function InteractiveCube({
   const scale = useThree((state) => state.size.width < 360 ? 0.72 : state.size.width < 430 ? 0.8 : state.size.width < 600 ? 0.9 : state.size.width < 900 ? 1.08 : state.size.width > 1600 ? 1.15 : 1);
   const cubeBaseColor = dark ? "#75a6aa" : "#729b9b";
   const cubeHoverColor = dark ? "#a4eee4" : "#b5e4dc";
+  const colors = useMemo(() => ({
+    base: new THREE.Color(dark ? "#75a6aa" : "#729b9b"),
+    hover: new THREE.Color(dark ? "#a4eee4" : "#b5e4dc"),
+    baseEmissive: new THREE.Color("#10252c"),
+    hoverEmissive: new THREE.Color("#3dd8d0"),
+  }), [dark]);
   const cubeBaseOpacity = dark ? 0.16 : 0.11;
   const cubeHoverOpacity = dark ? 0.3 : 0.19;
   const logoTextures = useLoader(THREE.TextureLoader, [
@@ -256,9 +265,11 @@ function InteractiveCube({
     fresnelMaterial.dispose();
     faceTextures.forEach((texture) => texture.dispose());
   }, [edgeGeometry, environment, faceGeometry, faceTextures, fresnelMaterial]);
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!group.current) return;
-    const t = state.clock.elapsedTime;
+    const frameDelta = Math.min(delta, 1 / 30);
+    if (!reducedMotion) motionTime.current += frameDelta;
+    const t = motionTime.current;
     const targetX = 0.3 + Math.sin(t * 0.13) * 0.24 + pointer.current.y * 0.16 + drag.current.rx;
     const targetY = -0.42 + t * 0.12 + pointer.current.x * 0.22 + drag.current.ry;
     const targetZ = Math.sin(t * 0.075) * 0.1 + pointer.current.x * 0.035;
@@ -276,19 +287,19 @@ function InteractiveCube({
       if (hoverLight.current) hoverLight.current.intensity = hovered ? (dark ? 2.8 : 1.6) : 0;
       return;
     }
-    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 2.6, delta);
-    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 2.6, delta);
-    group.current.rotation.z = THREE.MathUtils.damp(group.current.rotation.z, targetZ, 2.2, delta);
+    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 3.4, frameDelta);
+    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 3.4, frameDelta);
+    group.current.rotation.z = THREE.MathUtils.damp(group.current.rotation.z, targetZ, 3, frameDelta);
     const targetScale = scale * (hovered ? 1.035 : 1);
-    group.current.scale.setScalar(THREE.MathUtils.damp(group.current.scale.x, targetScale, 5, delta));
+    group.current.scale.setScalar(THREE.MathUtils.damp(group.current.scale.x, targetScale, 5, frameDelta));
     group.current.position.y = Math.sin(t * 0.52) * 0.035;
     if (cubeMaterial.current) {
-      cubeMaterial.current.color.lerp(new THREE.Color(hovered ? cubeHoverColor : cubeBaseColor), 1 - Math.exp(-delta * 5));
-      cubeMaterial.current.opacity = THREE.MathUtils.damp(cubeMaterial.current.opacity, hovered ? cubeHoverOpacity : cubeBaseOpacity, 5, delta);
-      cubeMaterial.current.emissive.lerp(new THREE.Color(hovered ? "#3dd8d0" : "#10252c"), 1 - Math.exp(-delta * 5));
-      cubeMaterial.current.emissiveIntensity = THREE.MathUtils.damp(cubeMaterial.current.emissiveIntensity, hovered ? (dark ? 0.42 : 0.2) : 0.08, 5, delta);
+      cubeMaterial.current.color.lerp(hovered ? colors.hover : colors.base, 1 - Math.exp(-frameDelta * 5));
+      cubeMaterial.current.opacity = THREE.MathUtils.damp(cubeMaterial.current.opacity, hovered ? cubeHoverOpacity : cubeBaseOpacity, 5, frameDelta);
+      cubeMaterial.current.emissive.lerp(hovered ? colors.hoverEmissive : colors.baseEmissive, 1 - Math.exp(-frameDelta * 5));
+      cubeMaterial.current.emissiveIntensity = THREE.MathUtils.damp(cubeMaterial.current.emissiveIntensity, hovered ? (dark ? 0.42 : 0.2) : 0.08, 5, frameDelta);
     }
-    if (hoverLight.current) hoverLight.current.intensity = THREE.MathUtils.damp(hoverLight.current.intensity, hovered ? (dark ? 2.8 : 1.6) : 0, 5, delta);
+    if (hoverLight.current) hoverLight.current.intensity = THREE.MathUtils.damp(hoverLight.current.intensity, hovered ? (dark ? 2.8 : 1.6) : 0, 5, frameDelta);
   });
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
@@ -309,7 +320,10 @@ function InteractiveCube({
   const handlePointerUp = (event: ThreeEvent<PointerEvent>) => {
     if (drag.current.pointerId === event.pointerId) {
       drag.current.active = false;
-      (event.target as CapturableTarget).releasePointerCapture(event.pointerId);
+      const target = event.target as CapturableTarget;
+      if ("hasPointerCapture" in target && target.hasPointerCapture(event.pointerId)) {
+        target.releasePointerCapture(event.pointerId);
+      }
       invalidate();
     }
   };
@@ -384,6 +398,19 @@ function LabelProjector({
   const worldPoint = useMemo(() => new THREE.Vector3(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
   const raycaster = useMemo(() => new THREE.Raycaster(), []);
+  const labelSizes = useRef(new WeakMap<HTMLButtonElement, { width: number; height: number }>());
+  useEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach(({ target, contentRect }) => {
+        if (target instanceof HTMLButtonElement) {
+          labelSizes.current.set(target, { width: target.offsetWidth || contentRect.width, height: target.offsetHeight || contentRect.height });
+        }
+      });
+    });
+    Object.values(labels.current).forEach((label) => { if (label) observer.observe(label); });
+    return () => observer.disconnect();
+  }, [labels]);
   useFrame(({ camera, size }) => {
     const projected = Object.keys(anchors).map((key) => {
       const id = key as OrbitId;
@@ -412,9 +439,11 @@ function LabelProjector({
     });
     const items = projected.filter((item): item is NonNullable<typeof item> => item !== null && item.visible);
     const placements = items.map(({ id, label, x, y }) => {
+      const dimensions = labelSizes.current.get(label) ?? { width: label.offsetWidth, height: label.offsetHeight };
+      const { width, height } = dimensions;
       const placeLeft = x < size.width * 0.5;
-      const offsetX = placeLeft ? -label.offsetWidth - 10 : 10;
-      return { id, label, x, y, width: label.offsetWidth, height: label.offsetHeight, labelX: THREE.MathUtils.clamp(x + offsetX, 4, Math.max(4, size.width - label.offsetWidth - 4)), labelY: THREE.MathUtils.clamp(y, label.offsetHeight / 2 + 3, size.height - label.offsetHeight / 2 - 3) };
+      const offsetX = placeLeft ? -width - 10 : 10;
+      return { id, label, x, y, width, height, labelX: THREE.MathUtils.clamp(x + offsetX, 4, Math.max(4, size.width - width - 4)), labelY: THREE.MathUtils.clamp(y, height / 2 + 3, size.height - height / 2 - 3) };
     });
     for (let pass = 0; pass < placements.length; pass += 1) {
       for (let index = 1; index < placements.length; index += 1) {
@@ -433,17 +462,18 @@ function LabelProjector({
       }
     }
     placements.forEach(({ id, label, x, y, labelX, labelY }) => {
+      const { width, height } = labelSizes.current.get(label) ?? { width: label.offsetWidth, height: label.offsetHeight };
       label.dataset.side = x < size.width * 0.5 ? "left" : "right";
       label.style.transform = `translate3d(${labelX}px, ${labelY}px, 0) translate(0, -50%)`;
       label.style.opacity = "1";
       const line = leaders.current[id];
       if (line) {
         const left = labelX;
-        const right = labelX + label.offsetWidth;
-        const top = labelY - label.offsetHeight / 2;
+        const right = labelX + width;
+        const top = labelY - height / 2;
         line.setAttribute("x1", `${x}`); line.setAttribute("y1", `${y}`);
         line.setAttribute("x2", `${THREE.MathUtils.clamp(x, left, right)}`);
-        line.setAttribute("y2", `${THREE.MathUtils.clamp(y, top, top + label.offsetHeight)}`);
+        line.setAttribute("y2", `${THREE.MathUtils.clamp(y, top, top + height)}`);
       }
     });
   });
@@ -485,10 +515,12 @@ function IdentityScene({
   const cyanLight = useRef<THREE.PointLight>(null);
   const violetLight = useRef<THREE.PointLight>(null);
   const cubeSurfaceRef = useRef<THREE.Mesh>(null);
+  const motionTime = useRef(0);
   const mutedColor = dark ? "#c5d0df" : "#344b61";
-  useFrame((state) => {
+  useFrame((_, delta) => {
     if (reducedMotion) return;
-    const t = state.clock.elapsedTime;
+    motionTime.current += Math.min(delta, 1 / 30);
+    const t = motionTime.current;
     if (cyanLight.current) cyanLight.current.position.set(Math.cos(t * 0.28) * 2.6, Math.sin(t * 0.34) * 1.5, 2.5);
     if (violetLight.current) violetLight.current.position.set(Math.sin(t * 0.2) * 2.3, Math.cos(t * 0.25) * 1.75, -0.8);
   });
@@ -532,7 +564,9 @@ function StaticFallback({ dark }: { dark: boolean }) {
 
 export default function HeroIdentityExperience() {
   const { theme } = useTheme();
-  const [motionEnabled, setMotionEnabled] = useState(true);
+  const [motionEnabled, setMotionEnabled] = useState(
+    () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const reducedMotion = !motionEnabled;
   const dark = theme === "dark";
   const stageRef = useRef<HTMLDivElement>(null);
@@ -623,9 +657,9 @@ export default function HeroIdentityExperience() {
         <Canvas
           aria-hidden="true"
           camera={{ position: [0, 0, 6.55], fov: 40 }}
-          dpr={coarsePointer || smallViewport ? 1 : [1, 1.45]}
+          dpr={coarsePointer ? [1, 1.65] : smallViewport ? [1, 1.75] : [1, 2]}
           frameloop={!motionEnabled || !visible ? "demand" : "always"}
-          gl={{ alpha: true, antialias: !coarsePointer && !smallViewport, powerPreference: "low-power" }}
+          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
           fallback={<StaticFallback dark={dark} />}
         >
           <IdentityScene
